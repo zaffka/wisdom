@@ -1,0 +1,48 @@
+package cmd
+
+import (
+	"net"
+
+	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
+	"github.com/zaffka/wisdom/internal/serve"
+	"go.uber.org/zap"
+)
+
+func init() {
+	rootCmd.AddCommand(server)
+}
+
+var server = &cobra.Command{
+	Use:   serverMicroServiceName,
+	Short: "Server to serve wisdom quotes via TCP4",
+	Run: func(cmd *cobra.Command, args []string) {
+		ctx := cmd.Context()
+		log := logger.With(
+			zap.String("micro_service", serverMicroServiceName),
+			zap.String("address", viper.GetString(serverAddr)))
+
+		log.Info("starting the server")
+
+		listener, err := net.Listen(tcp4Network, viper.GetString(serverAddr))
+		if err != nil {
+			log.Error("failed to init net listener", zap.Error(err))
+
+			return
+		}
+		defer func() {
+			if err := listener.Close(); err != nil {
+				log.Error("failed to close a listener", zap.Error(err))
+			}
+		}()
+
+		server := serve.NewServer(
+			serve.WithListener(listener),
+			serve.WithLogger(log),
+			serve.WithInitialPoWComplexity(viper.GetInt64(complexityPoW)),
+		)
+
+		go server.Run(ctx)
+		<-ctx.Done()
+	},
+}
