@@ -56,6 +56,7 @@ func (b Block) Sha256() []byte {
 
 // NewBlock creates a new Block with 8-bytes sized salt and 8-bytes sized nonce.
 // It uses cryptographically secure bytes generator and maxInt value to limit Nonce max value.
+// Setting maxInt value to bigger size means you'll need more calculation cycles at FindNonce execution.
 func NewBlock(maxInt int64) (Block, error) {
 	block := make(Block, BlockSize)
 	_, err := io.ReadFull(rand.Reader, block[:8])
