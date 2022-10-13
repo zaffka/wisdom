@@ -87,7 +87,7 @@ func IsValid(block Block, comparableHash []byte) bool {
 	return bytes.Equal(comparableHash, block.Sha256())
 }
 
-// FindNonce is picking up a Nonce, hashing it value using a salt it already knows.
+// FindNonce is picking up a Nonce, hashing its value with already known salt.
 // When the resulting hash is the same as provided - puzzle solved.
 func FindNonce(hash, salt []byte) (uint64, error) {
 	nonceBlock := make([]byte, 8)
