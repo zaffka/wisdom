@@ -1,4 +1,7 @@
-# RPC client and a server with Proof-of-Work anti-DDoS mechanics
+# RPC client and a server with Proof-of-Work
+
+Test assignment: Build simple TCP server and a client.  
+Protect the server from DDoS using Proof-of-Work algorithm.
 
 ## Proof of work principle
 
