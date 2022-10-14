@@ -6,6 +6,7 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"github.com/zaffka/wisdom/internal/serve"
+	"github.com/zaffka/wisdom/pkg/pow"
 	"go.uber.org/zap"
 )
 
@@ -24,7 +25,7 @@ var server = &cobra.Command{
 
 		log.Info("starting the server")
 
-		listener, err := net.Listen(tcp4Network, viper.GetString(serverAddr))
+		listener, err := net.Listen("tcp", viper.GetString(serverAddr))
 		if err != nil {
 			log.Error("failed to init net listener", zap.Error(err))
 
@@ -40,6 +41,7 @@ var server = &cobra.Command{
 			serve.WithListener(listener),
 			serve.WithLogger(log),
 			serve.WithInitialPoWComplexity(viper.GetInt64(complexityPoW)),
+			serve.WithPoWBlockFunc(pow.NewBlock),
 		)
 
 		go server.Run(ctx)

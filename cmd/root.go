@@ -45,9 +45,7 @@ func Execute() {
 	defer func() {
 		logger.Info("the app is finished")
 
-		if err := logger.Sync(); err != nil {
-			logger.Error("failed to flush logger data", zap.Error(err))
-		}
+		_ = logger.Sync()
 	}()
 
 	if err := rootCmd.ExecuteContext(rootCtx); err != nil {

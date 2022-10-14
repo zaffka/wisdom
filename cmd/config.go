@@ -9,7 +9,6 @@ const (
 	clientMicroServiceName = "client"
 	serverMicroServiceName = "server"
 
-	tcp4Network          = "tcp4"
 	serverAddr           = "SERVER_ADDR"
 	complexityPoW        = "COMPLEXITY_POW"
 	defaultComplexityPoW = 10000000

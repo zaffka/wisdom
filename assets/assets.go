@@ -2,28 +2,26 @@ package assets
 
 import (
 	_ "embed"
-
-	jsoniter "github.com/json-iterator/go"
+	"math/rand"
+	"strings"
+	"time"
 )
-
-//go:embed data/quotes.json
-var quotes []byte
 
 var (
-	json = jsoniter.ConfigCompatibleWithStandardLibrary
+	//go:embed data/quotes.txt
+	quotes string
 
-	// QuoteList holds list of all quotes stored within a service.
-	QuoteList []Quote
+	// QuotesList holds list of all quotes stored within a service.
+	QuotesList []string
 )
 
-// Quote represents a single citation of Wisdom.
-type Quote struct {
-	Text   string `json:"text"`
-	Author string `json:"author"`
+func init() {
+	QuotesList = strings.Split(quotes, "\n")
 }
 
-func init() {
-	if err := json.Unmarshal(quotes, &QuoteList); err != nil {
-		panic(err)
-	}
+// RandomQuote returns a random quote string from the QuotesList.
+func RandomQuote() string {
+	rand.Seed(time.Now().UnixNano())
+
+	return QuotesList[rand.Int63n(int64(len(QuotesList)))]
 }

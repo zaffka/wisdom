@@ -3,6 +3,7 @@ package serve
 import (
 	"net"
 
+	"github.com/zaffka/wisdom/pkg/pow"
 	"go.uber.org/zap"
 )
 
@@ -23,5 +24,11 @@ func WithLogger(logger *zap.Logger) OptFn {
 func WithInitialPoWComplexity(cmpx int64) OptFn {
 	return func(s *Server) {
 		s.powComplexity = cmpx
+	}
+}
+
+func WithPoWBlockFunc(powFn func(int64) (pow.Block, error)) OptFn {
+	return func(s *Server) {
+		s.makePowBlockFn = powFn
 	}
 }

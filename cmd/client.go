@@ -20,7 +20,7 @@ var client = &cobra.Command{
 		caller := call.NewCaller(
 			call.WithServerAddr(viper.GetString(serverAddr)),
 			call.WithLogger(log),
-			call.WithProtocol(tcp4Network),
+			call.WithProtocol("tcp"),
 		)
 
 		if err := caller.Run(cmd.Context()); err != nil {
