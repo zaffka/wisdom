@@ -16,11 +16,11 @@ Protect the server from DDoS using Proof-of-Work algorithm.
 
 ## FAQ:
 
-Q: What is Proof of Work how it linked to DDoS problem?
+Q: What is Proof of Work how it linked to DDoS problem?  
 A: The answer is [here](https://en.wikipedia.org/wiki/Proof_of_work)
 
-Q: Why do we need a Salt?
-A: To prevent [Rainbow tables attack](https://en.wikipedia.org/wiki/Rainbow_table)
+Q: Why do we need a Salt?  
+A: To prevent [Rainbow Tables attack](https://en.wikipedia.org/wiki/Rainbow_table)
 
 ## Project structure
 
