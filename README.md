@@ -22,6 +22,46 @@ A: The answer is [here](https://en.wikipedia.org/wiki/Proof_of_work)
 Q: Why do we need a Salt?
 A: To prevent [Rainbow tables attack](https://en.wikipedia.org/wiki/Rainbow_table)
 
+## Project structure
+
+```
+.
+├── assets
+│   ├── assets.go
+│   ├── assets_test.go
+│   └── data
+│       └── quotes.txt    <-- wisdom quotes list
+├── cmd
+│   ├── client.go
+│   ├── config.go
+│   ├── root.go
+│   └── server.go
+├── Dockerfile
+├── go.mod
+├── go.sum
+├── internal
+│   ├── call
+│   │   ├── caller.go
+│   │   └── opts.go
+│   └── serve
+│       ├── mocks
+│       │   └── ConnHandler.go
+│       ├── opts.go
+│       ├── server.go
+│       ├── server_test.go    <-- most of tests are here
+│       └── types.go
+├── main.go
+├── Makefile
+├── pkg
+│   ├── pow
+│   │   ├── pow.go    <-- proof of work package
+│   │   └── pow_test.go
+│   └── zaplog
+│       └── zaplog.go
+├── README.md
+└── rpc_scheme.jpg
+```
+
 ## Execution
 
 Just say `make` to download all the dependencies, run tests and build a docker container for both client and server.
